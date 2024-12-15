@@ -9,6 +9,8 @@ pub struct Player {
     down: KeyCode,
 
     speed: f32,
+    jump: f32,
+    fall: f32,
 }
 
 impl Player {
@@ -19,7 +21,9 @@ impl Player {
             up: KeyCode::KeyW,
             down: KeyCode::KeyS,
 
-            speed: 300.0,
+            speed: 400.0,
+            jump: 500.0,
+            fall: -200.0,
         }
     }
 }
@@ -30,21 +34,21 @@ fn inputs(
     time: Res<Time>,
 ) {
     for (player, mut pva) in &mut query {
-        let mut direction = Vec2::ZERO;
+        let mut direction = 0.0;
         if keyboard.pressed(player.left) {
-            direction.x -= 1.0;
+            direction -= 1.0;
         }
         if keyboard.pressed(player.right) {
-            direction.x += 1.0;
+            direction += 1.0;
         }
         if keyboard.pressed(player.up) {
-            direction.y += 1.0;
+            pva.velocity.y = player.jump;
         }
         if keyboard.pressed(player.down) {
-            direction.y -= 1.0;
+            pva.velocity.y = player.fall;
         }
-        direction = direction.normalize_or_zero() * player.speed;
-        pva.velocity = pva.velocity.lerp(direction, time.delta_secs() * 10.0);
+        direction = direction * player.speed;
+        pva.velocity.x = pva.velocity.x.lerp(direction, time.delta_secs() * 10.0);
     }
 }
 
