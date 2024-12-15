@@ -1,5 +1,8 @@
 use bevy::prelude::*;
 mod player;
+mod pva;
+mod setup;
+mod update;
 
 fn main() {
     App::new()
@@ -15,6 +18,7 @@ fn main() {
                     ..default()
                 }),
         )
-        .add_plugins(player::PlayerPlugin)
+        .add_plugins(setup::SetupPlugin)
+        .add_plugins(update::UpdatePlugin)
         .run();
 }
