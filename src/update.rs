@@ -1,4 +1,4 @@
-use crate::pva::update::PvaPlugin;
+use crate::pva::PvaPlugin;
 use bevy::prelude::*;
 
 pub struct UpdatePlugin;
