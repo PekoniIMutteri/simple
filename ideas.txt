@@ -1,0 +1,7 @@
+1. make 2 controlable characters
+
+2. collidables
+
+3. level mechanics
+
+4. simple menu
