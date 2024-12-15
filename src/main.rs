@@ -21,4 +21,5 @@ fn main() {
         .add_plugins(setup::SetupPlugin)
         .add_plugins(update::UpdatePlugin)
         .run();
+    println!("succesfully closed !")
 }

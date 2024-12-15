@@ -4,7 +4,7 @@ use bevy::prelude::*;
 
 fn player(mut commands: Commands) {
     commands.spawn((
-        Player {},
+        Player::default_inputs(),
         Pva {
             position: Vec2::new(0.0, 0.0),
             velocity: Vec2::new(20.0, 0.0),
