@@ -1,5 +1,4 @@
-use crate::player::PlayerPlugin;
-use crate::pva::PvaPlugin;
+use crate::pva::{player::PlayerPlugin, PvaPlugin};
 use bevy::prelude::*;
 
 pub struct UpdatePlugin;

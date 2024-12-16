@@ -1,9 +1,7 @@
 use bevy::prelude::*;
-mod player;
 mod pva;
 mod setup;
 mod update;
-mod wall;
 
 fn main() {
     App::new()

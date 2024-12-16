@@ -1,4 +1,4 @@
-use crate::pva::Pva;
+use super::Pva;
 use bevy::prelude::*;
 
 #[derive(Component)]
@@ -13,8 +13,8 @@ pub struct Player {
     fall: f32,
 }
 
-impl Player {
-    pub fn default_inputs() -> Player {
+impl Default for Player {
+    fn default() -> Player {
         Player {
             left: KeyCode::KeyA,
             right: KeyCode::KeyD,
@@ -52,12 +52,31 @@ fn inputs(
     }
 }
 
+#[derive(Bundle)]
+pub struct PlayerBundle {
+    pub player: Player,
+    pub pva: Pva,
+    pub transform: Transform,
+    pub sprite: Sprite,
+}
+
+impl Default for PlayerBundle {
+    fn default() -> PlayerBundle {
+        PlayerBundle {
+            player: Player::default(),
+            pva: Pva::default_gravity(),
+            transform: Transform::default(),
+            sprite: Sprite::default(),
+        }
+    }
+}
+
 //
 
 pub struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, inputs);
+        app.add_systems(PreUpdate, inputs);
     }
 }
