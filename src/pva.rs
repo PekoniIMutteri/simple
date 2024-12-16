@@ -2,9 +2,11 @@ use bevy::prelude::*;
 
 #[derive(Component)]
 pub struct Pva {
-    pub position: Vec2,
-    pub velocity: Vec2,
-    pub acceleration: Vec2,
+    pub position: Vec3,
+    pub velocity: Vec3,
+    pub acceleration: Vec3,
+
+    pub movable: bool,
 }
 
 fn update_pva(mut query: Query<&mut Pva>, time: Res<Time>) {
@@ -15,14 +17,34 @@ fn update_pva(mut query: Query<&mut Pva>, time: Res<Time>) {
 
 fn update_transform(mut query: Query<(&Pva, &mut Transform)>) {
     for (pva, mut transform) in &mut query {
-        transform.translation = pva.position.extend(0.0);
+        transform.translation = pva.position;
     }
 }
 
 impl Pva {
     fn update(&mut self, delta: f32) {
-        self.position += self.velocity * delta;
-        self.velocity += self.acceleration * delta;
+        if self.movable {
+            self.position += self.velocity * delta;
+            self.velocity += self.acceleration * delta;
+        }
+    }
+
+    pub fn default() -> Self {
+        Self {
+            position: Vec3::ZERO,
+            velocity: Vec3::ZERO,
+            acceleration: Vec3::ZERO,
+
+            movable: false,
+        }
+    }
+
+    pub fn default_gravity() -> Self {
+        Self {
+            acceleration: Vec3::new(0.0, -1000.0, 0.0),
+            movable: true,
+            ..Self::default()
+        }
     }
 }
 

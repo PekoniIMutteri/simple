@@ -11,7 +11,7 @@ fn main() {
                 .set(ImagePlugin::default_nearest())
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        resolution: bevy::window::WindowResolution::new(700.0, 500.0),
+                        resolution: bevy::window::WindowResolution::new(1280.0, 720.0),
                         present_mode: bevy::window::PresentMode::Fifo,
                         ..default()
                     }),
