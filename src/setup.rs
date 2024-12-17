@@ -14,13 +14,37 @@ fn camera(mut commands: Commands) {
 
 fn test_wall(mut commands: Commands) {
     let mut wall = WallBundle::default();
-    wall.pva.position.y = -200.0;
-    wall.pva.size = Vec2::splat(100.0);
+    wall.pva.position.y = -300.0;
+    wall.pva.size = Vec2::new(2000.0, 400.0);
 
     commands.spawn((
         wall,
         Sprite {
-            custom_size: Some(Vec2::splat(100.0)),
+            custom_size: Some(Vec2::new(2000.0, 400.0)),
+            ..default()
+        },
+    ));
+
+    let mut wall = WallBundle::default();
+    wall.pva.position.x = -500.0;
+    wall.pva.size = Vec2::new(400.0, 2000.0);
+
+    commands.spawn((
+        wall,
+        Sprite {
+            custom_size: Some(Vec2::new(400.0, 2000.0)),
+            ..default()
+        },
+    ));
+
+    let mut wall = WallBundle::default();
+    wall.pva.position.y = 200.0;
+    wall.pva.size = Vec2::new(2000.0, 400.0);
+
+    commands.spawn((
+        wall,
+        Sprite {
+            custom_size: Some(Vec2::new(2000.0, 400.0)),
             ..default()
         },
     ));

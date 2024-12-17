@@ -22,7 +22,7 @@ impl Default for Player {
             down: KeyCode::KeyS,
 
             speed: 400.0,
-            jump: 500.0,
+            jump: 1000.0,
             fall: -200.0,
         }
     }
@@ -41,7 +41,7 @@ fn inputs(
         if keyboard.pressed(player.right) {
             direction += 1.0;
         }
-        if keyboard.pressed(player.up) {
+        if keyboard.pressed(player.up) && pva.is_on_ground {
             pva.velocity.y = player.jump;
         }
         if keyboard.pressed(player.down) {
